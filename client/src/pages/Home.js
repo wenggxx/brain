@@ -23,7 +23,7 @@ export default function Home() {
     <div style={{ fontFamily: 'Georgia, Times, "Times New Roman", serif', background: '#fff', color: '#222', minHeight: '100vh' }}>
       {/* Header */}
       <header style={{ borderBottom: '1px solid #e2e2e2', padding: '2rem 0', textAlign: 'center' }}>
-        <h1 style={{ fontSize: '3rem', letterSpacing: '2px', fontWeight: 'bold', margin: 0 }}>The New York Times</h1>
+        <h1 style={{ fontSize: '3rem', letterSpacing: '2px', fontWeight: 'bold', margin: 0 }}>The Brainz Up</h1>
         <div style={{ fontSize: '1.1rem', color: '#888', marginTop: '0.5rem' }}>{new Date().toLocaleDateString()}</div>
       </header>
 
