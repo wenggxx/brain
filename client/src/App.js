@@ -5,6 +5,7 @@ import Games from './pages/Games';
 import Learn from './pages/Learn';
 import News from './pages/News';
 import About from './pages/About';
+import ShowNews from './pages/ShowNews'; // Add this import
 
 function App() {
   return (
@@ -30,6 +31,8 @@ function App() {
           <Route path="/learn" element={<Learn />} />
           <Route path="/news" element={<News />} />
           <Route path="/about" element={<About />} />
+          <Route path="/news/:id" element={<ShowNews />} /> {/* Add this route for ShowNews */}
+          <Route path="*" element={<div>404 Not Found</div>} /> {/* Catch-all route for 404 */}
         </Routes>
       </div>
     </Router>

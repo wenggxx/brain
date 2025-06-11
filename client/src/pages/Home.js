@@ -1,11 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Add this import
 
 export default function Home() {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate(); // Add this line
+
+  // Handler for clicking the main article title
+  const handleTitleClick = async (id) => {
+    await fetch(`/api/news?id=${encodeURIComponent(id)}`);
+    navigate(`/news/${id}`); // Navigate to ShowNews with the id
+  };
 
   useEffect(() => {
-    fetch('/api/news')
+    fetch('/api/home')
       .then((res) => res.json())
       .then((data) => {
         setArticles(data);
@@ -53,8 +61,8 @@ export default function Home() {
             width: 100%;
             height: 350px;
             max-height: 350px;
-            object-fit: contain; /* changed from cover to contain */
-            background: #f5f5f5; /* optional: subtle background for letterboxing */
+            object-fit: contain;
+            background: #f5f5f5;
             border-radius: 8px;
             display: block;
           }
@@ -62,8 +70,8 @@ export default function Home() {
             width: 100%;
             height: 150px;
             max-height: 150px;
-            object-fit: contain; /* changed from cover to contain */
-            background: #f5f5f5; /* optional: subtle background for letterboxing */
+            object-fit: contain;
+            background: #f5f5f5;
             border-radius: 8px;
             display: block;
           }
@@ -148,7 +156,18 @@ export default function Home() {
                   alt={articles[0].title}
                   className="home-article-img-main"
                 />
-                <h2 style={{ fontSize: '2rem', margin: '1rem 0 0.5rem' }}>{articles[0].title}</h2>
+                <h2 style={{ fontSize: '2rem', margin: '1rem 0 0.5rem' }}>
+                  <a
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleTitleClick(articles[0].id);
+                    }}
+                    style={{ color: '#222', textDecoration: 'none', cursor: 'pointer' }}
+                  >
+                    {articles[0].title}
+                  </a>
+                </h2>
                 <p style={{ fontSize: '1.2rem', color: '#444' }}>{articles[0].summary}</p>
               </div>
               <hr style={{ margin: '2rem 0' }} />
@@ -160,7 +179,18 @@ export default function Home() {
                       alt={article.title}
                       className="home-article-img"
                     />
-                    <h3 style={{ fontSize: '1.2rem', margin: '0.5rem 0' }}>{article.title}</h3>
+                    <h3 style={{ fontSize: '1.2rem', margin: '0.5rem 0' }}>
+                      <a
+                        href="#"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleTitleClick(article.id);
+                        }}
+                        style={{ color: '#222', textDecoration: 'none' }}
+                      >
+                        {article.title}
+                      </a>
+                    </h3>
                     <p style={{ fontSize: '1rem', color: '#555' }}>{article.summary}</p>
                   </div>
                 ))}

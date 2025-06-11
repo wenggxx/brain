@@ -28,7 +28,7 @@ con.connect(function(err) {
   console.log("Connected!");
 });
 
-app.get('/api/news', (req, res) => {
+app.get('/api/home', (req, res) => {
       con.connect(function(err) {
       if (err) throw err;
       con.query("SELECT * FROM news n JOIN image i ON (n.id = i.id AND i.category = 'news') WHERE seq_num = 1", function (err, result, fields) {
@@ -37,6 +37,20 @@ app.get('/api/news', (req, res) => {
       });
     });
   });
-      
+ 
+app.get('/api/news/:id', (req, res) => {
+  const newsId = req.params.id;
+  con.query(
+    "SELECT * FROM news n JOIN image i ON (n.id = i.id AND i.category = 'news') WHERE n.id = ?",
+    [newsId],
+    function (err, result, fields) {
+      if (err) {
+        res.status(500).json({ error: 'Database error' });
+        return;
+      }
+      res.json(result);
+    }
+  );
+});
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
