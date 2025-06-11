@@ -1,5 +1,6 @@
 const express = require('express');
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
+var mysql = require('mysql');
 const cors = require('cors');
 require('dotenv').config();
 
@@ -14,6 +15,7 @@ app.get('/', (req, res) => {
   res.send('Backend is running');
 });
 
+/*
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -21,3 +23,15 @@ mongoose.connect(process.env.MONGO_URI, {
   console.log('MongoDB connected');
   app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 }).catch(err => console.error(err));
+*/
+var con = mysql.createConnection({
+  host: process.env.mysql_host,
+  user: process.env.mysql_user,
+  password: process.env.mysql_password,
+  database: process.env.mysql_database
+});
+
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+});
