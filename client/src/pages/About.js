@@ -4,7 +4,7 @@ export default function About() {
   const [message, setMessage] = useState([]);
 
   useEffect(() => {
-    fetch('/api/hello')
+    fetch('/api/news')
       .then(response => response.json())
       .then(data => setMessage(data));
   }, []);

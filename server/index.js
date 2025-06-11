@@ -28,10 +28,10 @@ con.connect(function(err) {
   console.log("Connected!");
 });
 
-app.get('/api/hello', (req, res) => {
+app.get('/api/news', (req, res) => {
       con.connect(function(err) {
       if (err) throw err;
-      con.query("SELECT * FROM news", function (err, result, fields) {
+      con.query("SELECT * FROM news n JOIN image i ON (n.id = i.id AND i.category = 'news') WHERE seq_num = 1", function (err, result, fields) {
         if (err) throw err;
         res.json(result);
       });
