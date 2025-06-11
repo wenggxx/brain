@@ -10,14 +10,19 @@ function App() {
   return (
     <Router>
       <div>
-        <nav style={{ padding: '1rem', background: '#f4f4f4' }}>
-          <ul style={{ display: 'flex', listStyle: 'none', gap: '1rem' }}>
+        <nav style={{ padding: '1rem', background: '#f4f4f4', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <ul style={{ display: 'flex', listStyle: 'none', gap: '1rem', margin: 0 }}>
             <li><Link to="/">Home</Link></li>
             <li><Link to="/games">Games</Link></li>
             <li><Link to="/learn">Learn</Link></li>
             <li><Link to="/news">News</Link></li>
             <li><Link to="/about">About</Link></li>
           </ul>
+          <div>
+            <Link to="/login" style={{ textDecoration: 'none', color: '#333', padding: '0.5rem 1rem', border: '1px solid #ccc', borderRadius: '4px' }}>
+              Login
+            </Link>
+          </div>
         </nav>
         <Routes>
           <Route path="/" element={<Home />} />
