@@ -17,7 +17,7 @@ export default function About() {
           <li key={index}>
             {Object.entries(row).map(([key, value]) => (
               <div key={key}>
-                <strong>{key}:</strong> {value.toString()}
+                <strong>{key}:</strong> {value !== null && value !== undefined ? value.toString() : ''}
               </div>
             ))}
           </li>

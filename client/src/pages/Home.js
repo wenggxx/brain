@@ -152,7 +152,7 @@ export default function Home() {
             <>
               <div>
                 <img
-                  src={articles[0].image}
+                  src={articles[0].image_url}
                   alt={articles[0].title}
                   className="home-article-img-main"
                 />
@@ -175,7 +175,7 @@ export default function Home() {
                 {articles.slice(1).map((article, idx) => (
                   <div key={idx} className="home-article">
                     <img
-                      src={article.image}
+                      src={article.image_url}
                       alt={article.title}
                       className="home-article-img"
                     />

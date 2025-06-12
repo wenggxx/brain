@@ -23,9 +23,59 @@ export default function ShowNews() {
 
   return (
     <div style={{ maxWidth: 800, margin: '2rem auto', fontFamily: 'Georgia, serif' }}>
-      <img src={news.image} alt={news.title} style={{ width: '100%', maxHeight: 400, objectFit: 'contain' }} />
-      <h1>{news.title}</h1>
-      <p style={{ fontSize: '1.2rem', color: '#444' }}>{news.body}</p>
+      <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '1.2rem', lineHeight: 1.1 }}>{news.title}</h1>
+      <img
+        src={news.image_url}
+        alt={news.title}
+        style={{
+          width: '100%',
+          maxHeight: 400,
+          objectFit: 'contain',
+          borderRadius: 8,
+          background: '#f5f5f5',
+          marginBottom: '1.2rem'
+        }}
+      />
+      <div
+        style={{
+          fontSize: '0.95rem',
+          color: '#111',
+          marginBottom: '2.2rem',
+          fontFamily: 'Georgia, serif',
+          borderTop: '1px solid #e2e2e2',
+          borderBottom: '1px solid #e2e2e2',
+          padding: '0.7rem 0',
+          marginTop: '1.2rem'
+        }}
+      >
+        <span>
+          {news.create_dts && (
+            <span>
+              <span style={{ color: '#888' }}>Published</span> {new Date(news.create_dts).toLocaleDateString(undefined, {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}
+              {news.author || news.source ? ' | ' : ''}
+            </span>
+          )}
+          {news.author && (
+            <span>
+              <span style={{ color: '#888' }}>Author</span> {news.author}
+              {news.source ? ' | ' : ''}
+            </span>
+          )}
+          {news.source && (
+            <span>
+              <span style={{ color: '#888' }}>Source</span> {news.source}
+            </span>
+          )}
+        </span>
+      </div>
+      <div
+        style={{ fontSize: '1.2rem', color: '#444', marginBottom: '2rem', lineHeight: 1.7 }}
+        dangerouslySetInnerHTML={{ __html: news.body }}
+      />
       <div>{news.content}</div>
     </div>
   );

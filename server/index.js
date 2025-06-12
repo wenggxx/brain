@@ -31,7 +31,7 @@ con.connect(function(err) {
 app.get('/api/home', (req, res) => {
       con.connect(function(err) {
       if (err) throw err;
-      con.query("SELECT * FROM news n JOIN image i ON (n.id = i.id AND i.category = 'news') WHERE seq_num = 1", function (err, result, fields) {
+      con.query("SELECT * FROM news LIMIT 10", function (err, result, fields) {
         if (err) throw err;
         res.json(result);
       });
@@ -41,7 +41,7 @@ app.get('/api/home', (req, res) => {
 app.get('/api/news/:id', (req, res) => {
   const newsId = req.params.id;
   con.query(
-    "SELECT * FROM news n JOIN image i ON (n.id = i.id AND i.category = 'news') WHERE n.id = ?",
+    "SELECT * FROM news n WHERE n.id = ?",
     [newsId],
     function (err, result, fields) {
       if (err) {
