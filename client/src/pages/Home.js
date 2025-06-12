@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Add this import
+import { useNavigate } from 'react-router-dom';
+import '../css/app.css'; // Import the shared CSS file
 
 export default function Home() {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate(); // Add this line
+  const navigate = useNavigate();
 
-  // Handler for clicking the main article title
   const handleTitleClick = async (id) => {
     await fetch(`/api/news?id=${encodeURIComponent(id)}`);
-    navigate(`/news/${id}`); // Navigate to ShowNews with the id
+    navigate(`/news/${id}`);
   };
 
   useEffect(() => {
@@ -24,116 +24,6 @@ export default function Home() {
 
   return (
     <div className="home-root">
-      <style>
-        {`
-          .home-root {
-            font-family: Georgia, Times, "Times New Roman", serif;
-            background: #fff;
-            color: #222;
-            min-height: 100vh;
-          }
-          .home-header {
-            border-bottom: 1px solid #e2e2e2;
-            padding: 2rem 0;
-            text-align: center;
-          }
-          .home-title {
-            font-size: 3rem;
-            letter-spacing: 2px;
-            font-weight: bold;
-            margin: 0;
-          }
-          .home-date {
-            font-size: 1.1rem;
-            color: #888;
-            margin-top: 0.5rem;
-          }
-          .home-main {
-            display: flex;
-            max-width: 1200px;
-            margin: 2rem auto;
-            gap: 2rem;
-          }
-          .home-section {
-            flex: 3;
-          }
-          .home-article-img-main {
-            width: 100%;
-            height: 350px;
-            max-height: 350px;
-            object-fit: contain;
-            background: #f5f5f5;
-            border-radius: 8px;
-            display: block;
-          }
-          .home-article-img {
-            width: 100%;
-            height: 150px;
-            max-height: 150px;
-            object-fit: contain;
-            background: #f5f5f5;
-            border-radius: 8px;
-            display: block;
-          }
-          .home-articles-row {
-            display: flex;
-            gap: 2rem;
-          }
-          .home-article {
-            flex: 1;
-          }
-          .home-sidebar {
-            flex: 1;
-            border-left: 1px solid #e2e2e2;
-            padding-left: 2rem;
-          }
-          .home-footer {
-            border-top: 1px solid #e2e2e2;
-            text-align: center;
-            padding: 1rem 0;
-            color: #888;
-            font-size: 0.9rem;
-          }
-          @media (max-width: 900px) {
-            .home-main {
-              flex-direction: column;
-              gap: 1.5rem;
-              padding: 0 1rem;
-            }
-            .home-sidebar {
-              border-left: none;
-              padding-left: 0;
-              border-top: 1px solid #e2e2e2;
-              padding-top: 1.5rem;
-            }
-            .home-section {
-              flex: unset;
-            }
-            .home-articles-row {
-              flex-direction: column;
-              gap: 1rem;
-            }
-            .home-article {
-              flex: unset;
-            }
-          }
-          @media (max-width: 600px) {
-            .home-title {
-              font-size: 2rem;
-            }
-            .home-header {
-              padding: 1rem 0;
-            }
-            .home-main {
-              margin: 1rem 0;
-            }
-            .home-article-img-main {
-              height: 200px;
-              max-height: 200px;
-            }
-          }
-        `}
-      </style>
       {/* Header */}
       <header className="home-header">
         <h1 className="home-title">The Brainz Up</h1>
@@ -156,21 +46,21 @@ export default function Home() {
                   alt={articles[0].title}
                   className="home-article-img-main"
                 />
-                <h2 style={{ fontSize: '2rem', margin: '1rem 0 0.5rem' }}>
+                <h2 className="home-main-title">
                   <a
                     href="#"
                     onClick={(e) => {
                       e.preventDefault();
                       handleTitleClick(articles[0].id);
                     }}
-                    style={{ color: '#222', textDecoration: 'none', cursor: 'pointer' }}
+                    className="home-main-link"
                   >
                     {articles[0].title}
                   </a>
                 </h2>
-                <p style={{ fontSize: '1.2rem', color: '#444' }}>{articles[0].summary}</p>
+                <p className="home-main-summary">{articles[0].summary}</p>
               </div>
-              <hr style={{ margin: '2rem 0' }} />
+              <hr className="home-divider" />
               <div className="home-articles-row">
                 {articles.slice(1).map((article, idx) => (
                   <div key={idx} className="home-article">
@@ -179,19 +69,19 @@ export default function Home() {
                       alt={article.title}
                       className="home-article-img"
                     />
-                    <h3 style={{ fontSize: '1.2rem', margin: '0.5rem 0' }}>
+                    <h3 className="home-article-title">
                       <a
                         href="#"
                         onClick={(e) => {
                           e.preventDefault();
                           handleTitleClick(article.id);
                         }}
-                        style={{ color: '#222', textDecoration: 'none' }}
+                        className="home-article-link"
                       >
                         {article.title}
                       </a>
                     </h3>
-                    <p style={{ fontSize: '1rem', color: '#555' }}>{article.summary}</p>
+                    <p className="home-article-summary">{article.summary}</p>
                   </div>
                 ))}
               </div>
@@ -201,8 +91,8 @@ export default function Home() {
 
         {/* Sidebar */}
         <aside className="home-sidebar">
-          <h4 style={{ fontWeight: 'bold', marginBottom: '1rem' }}>Trending</h4>
-          <ul style={{ listStyle: 'none', padding: 0, fontSize: '1rem', color: '#444' }}>
+          <h4 className="home-sidebar-title">Trending</h4>
+          <ul className="home-sidebar-list">
             <li>• Supreme Court Ruling on Tech</li>
             <li>• Summer Travel Destinations</li>
             <li>• NBA Finals Recap</li>
