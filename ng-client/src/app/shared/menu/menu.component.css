@@ -1,0 +1,15 @@
+.top-menu {
+  display: flex;
+  gap: 2rem;
+  background: #f5f5f5;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #e2e2e2;
+}
+.top-menu a {
+  text-decoration: none;
+  color: #222;
+  font-weight: bold;
+}
+.top-menu a.active {
+  color: #0072ce;
+}

@@ -1,0 +1,10 @@
+<div>
+  <h1>Messages</h1>
+  <ul>
+    <li *ngFor="let row of message">
+      <div *ngFor="let entry of row | keyvalue">
+        <strong>{{ entry.key }}:</strong> {{ entry.value !== null && entry.value !== undefined ? entry.value : '' }}
+      </div>
+    </li>
+  </ul>
+</div>

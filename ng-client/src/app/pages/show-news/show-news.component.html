@@ -1,0 +1,24 @@
+<div class="shownews-root" *ngIf="!loading && news">
+  <h1 class="shownews-title">{{ news.title }}</h1>
+  <img [src]="news.image_url" [alt]="news.title" class="shownews-image" />
+  <div class="shownews-meta">
+    <span>
+      <span *ngIf="news.create_dts">
+        <span class="published">Published</span>
+        {{ news.create_dts | date:'longDate' }}
+        <span *ngIf="news.author || news.source"> | </span>
+      </span>
+      <span *ngIf="news.author">
+        <span class="published">Author</span> {{ news.author }}
+        <span *ngIf="news.source"> | </span>
+      </span>
+      <span *ngIf="news.source">
+        <span class="published">Source</span> {{ news.source }}
+      </span>
+    </span>
+  </div>
+  <div class="shownews-body" [innerHTML]="news.body"></div>
+  <div>{{ news.content }}</div>
+</div>
+<div *ngIf="loading">Loading...</div>
+<div *ngIf="!loading && !news">Article not found.</div>

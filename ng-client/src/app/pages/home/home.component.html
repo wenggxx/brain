@@ -1,0 +1,48 @@
+<div class="home-root">
+  <header class="home-header">
+    <h1 class="home-title">The Brainz Up</h1>
+    <div class="home-date">{{ today | date }}</div>
+  </header>
+  <main class="home-main">
+    <section class="home-section">
+      <div *ngIf="loading">Loading...</div>
+      <div *ngIf="!loading && articles.length === 0">No news available.</div>
+      <ng-container *ngIf="!loading && articles.length > 0">
+        <div>
+          <img [src]="articles[0].image_url" [alt]="articles[0].title" class="home-article-img-main" />
+          <h2 class="home-main-title">
+            <a href="#" (click)="goToNews(articles[0].id); $event.preventDefault()" class="home-main-link">
+              {{ articles[0].title }}
+            </a>
+          </h2>
+          <p class="home-main-summary">{{ articles[0].summary }}</p>
+        </div>
+        <hr class="home-divider" />
+        <div class="home-articles-row">
+          <div *ngFor="let article of articles.slice(1)" class="home-article">
+            <img [src]="article.image_url" [alt]="article.title" class="home-article-img" />
+            <h3 class="home-article-title">
+              <a href="#" (click)="goToNews(article.id); $event.preventDefault()" class="home-article-link">
+                {{ article.title }}
+              </a>
+            </h3>
+            <p class="home-article-summary">{{ article.summary }}</p>
+          </div>
+        </div>
+      </ng-container>
+    </section>
+    <aside class="home-sidebar">
+      <h4 class="home-sidebar-title">Trending</h4>
+      <ul class="home-sidebar-list">
+        <li> Supreme Court Ruling on Tech</li>
+        <li> Summer Travel Destinations</li>
+        <li> NBA Finals Recap</li>
+        <li> Climate Change Initiatives</li>
+        <li> New York City Dining Guide</li>
+      </ul>
+    </aside>
+  </main>
+  <footer class="home-footer">
+    © {{ today | date:'yyyy' }} The Brainz Up.
+  </footer>
+</div>
