@@ -110,10 +110,16 @@
   flex: 1;
 }
 
-.home-sidebar {
-  flex: 1;
-  border-left: 1px solid #e2e2e2;
-  padding-left: 2rem;
+.home-sidebar-list {
+  list-style: disc inside;
+  padding-left: 1.2em;
+  margin: 0;
+}
+
+.home-sidebar-list li {
+  display: list-item;
+  margin-bottom: 0.5em;
+  white-space: normal;
 }
 
 .home-footer {
