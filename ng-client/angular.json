@@ -57,7 +57,11 @@
           "builder": "@angular/build:dev-server",
           "options": {
             "port": 80,
-            "host": "0.0.0.0"
+            "host": "0.0.0.0",
+            "allowedHosts": [
+              "localhost",
+              "brainzup.ddns.net"
+            ]
           },
           "configurations": {
             "production": {
