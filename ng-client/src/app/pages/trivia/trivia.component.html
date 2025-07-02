@@ -1,0 +1,32 @@
+<div *ngIf="questionData">
+  <h2>{{ questionData.question }}</h2>
+
+  <form>
+    <div *ngFor="let choice of questionData.choices; let i = index">
+      <label>
+        <input
+          type="radio"
+          name="choices"
+          [value]="i"
+          (change)="onChoiceClick(i)"
+          [checked]="selectedChoiceIndex === i"
+        />
+        {{ choice.choice }}
+      </label>
+    </div>
+  </form>
+
+  <div *ngIf="selectedChoiceIndex !== null" style="margin-top: 1em;">
+    <p *ngIf="isCorrect" style="color: green;">✅ Correct!</p>
+    <p *ngIf="isCorrect === false" style="color: red;">❌ Incorrect</p>
+
+    <!-- 🟡 Explanation shown *after* answer feedback -->
+    <div style="margin-top: 1em;">
+      <strong>Explanation:</strong> {{ questionData.explanation }}
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!questionData">
+  Loading question...
+</div>
