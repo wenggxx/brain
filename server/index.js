@@ -41,7 +41,24 @@ app.get('/api/home', (req, res) => {
 app.get('/api/trivia', (req, res) => {
       con.connect(function(err) {
       if (err) throw err;
-      con.query("WITH cte AS (SELECT id FROM trivia ORDER BY RAND() LIMIT 1) SELECT * FROM trivia t JOIN trivia_choice c ON (t.id = c.trivia_id) JOIN cte ON (t.id = cte.id)", function (err, result, fields) {
+      con.query(
+        `WITH cte AS (
+          SELECT id FROM trivia ORDER BY RAND()
+          LIMIT 1
+      )
+      SELECT
+          t.question,
+          t.explanation,
+          JSON_ARRAYAGG(
+              JSON_OBJECT(
+                  'choice', c.choice,
+                  'is_correct', c.is_correct
+              )
+          ) AS choices
+      FROM trivia t
+      JOIN cte ON (t.id = cte.id)
+      LEFT JOIN trivia_choice c ON t.id = c.trivia_id
+      GROUP BY t.id, t.question, t.explanation`, function (err, result, fields) {
         if (err) throw err;
         res.json(result);
       });
