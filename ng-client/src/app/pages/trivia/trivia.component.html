@@ -12,16 +12,16 @@
           name="choices"
           [value]="i"
           (change)="onChoiceClick(i)"
-          [checked]="selectedChoiceIndex === i"
+          [checked]="currentSelection.selectedChoiceIndex === i"
         />
         {{ choice.choice }}
       </label>
     </div>
   </form>
 
-  <div *ngIf="selectedChoiceIndex !== null" class="quiz-feedback">
-    <p *ngIf="isCorrect" class="quiz-correct">✅ Correct!</p>
-    <p *ngIf="isCorrect === false" class="quiz-wrong">❌ Incorrect</p>
+  <div *ngIf="currentSelection.selectedChoiceIndex !== null" class="quiz-feedback">
+    <p *ngIf="currentSelection.isCorrect" class="quiz-correct">✅ Correct!</p>
+    <p *ngIf="currentSelection.isCorrect === false" class="quiz-wrong">❌ Incorrect</p>
 
     <div class="quiz-explanation">
       <strong>Explanation:</strong> {{ currentQuestion.explanation }}

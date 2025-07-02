@@ -13,6 +13,11 @@ interface Question {
   explanation: string;
 }
 
+interface UserSelection {
+  selectedChoiceIndex: number | null;
+  isCorrect: boolean | null;
+}
+
 @Component({
   selector: 'app-trivia',
   standalone: true,
@@ -24,8 +29,9 @@ interface Question {
 export class TriviaComponent {
   questions: Question[] = [];
   currentIndex = 0;
-  selectedChoiceIndex: number | null = null;
-  isCorrect: boolean | null = null;
+  
+  // Store selection per question index
+  userSelections: UserSelection[] = [];
 
   constructor() {}
 
@@ -37,6 +43,11 @@ export class TriviaComponent {
         this.questions = data.map((item: any) =>
           typeof item._result === 'string' ? JSON.parse(item._result) : item._result
         );
+        // Initialize userSelections array with empty selections
+        this.userSelections = this.questions.map(() => ({
+          selectedChoiceIndex: null,
+          isCorrect: null,
+        }));
       })
       .catch(error => {
         console.error('Error fetching data:', error);
@@ -47,28 +58,31 @@ export class TriviaComponent {
     return this.questions.length > 0 ? this.questions[this.currentIndex] : null;
   }
 
+  get currentSelection(): UserSelection {
+    return this.userSelections[this.currentIndex] || { selectedChoiceIndex: null, isCorrect: null };
+  }
+
   onChoiceClick(index: number): void {
-    this.selectedChoiceIndex = index;
     if (!this.currentQuestion) return;
-    this.isCorrect = this.currentQuestion.choices[index].is_correct === 1;
+
+    const isCorrect = this.currentQuestion.choices[index].is_correct === 1;
+
+    // Save user selection for current question
+    this.userSelections[this.currentIndex] = {
+      selectedChoiceIndex: index,
+      isCorrect,
+    };
   }
 
   nextQuestion(): void {
     if (this.currentIndex < this.questions.length - 1) {
       this.currentIndex++;
-      this.resetSelection();
     }
   }
 
   prevQuestion(): void {
     if (this.currentIndex > 0) {
       this.currentIndex--;
-      this.resetSelection();
     }
-  }
-
-  resetSelection(): void {
-    this.selectedChoiceIndex = null;
-    this.isCorrect = null;
   }
 }
