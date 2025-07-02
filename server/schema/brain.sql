@@ -50,29 +50,61 @@ VALUES ('Kelly is also sigma', 'So so sigma', NOW(), 'assets/images/news/3/tongt
         'Kelly is Sigma because she lives life with a kind of quiet power that doesn''t need to be loud to be respected. She doesn''t chase attention, titles, or validation — she moves with purpose, guided by her own internal compass, not the noise of the world around her. While others scramble for recognition or approval, Kelly stands firm in who she is, completely comfortable walking her own path. Her confidence is unshakable, not because she''s boastful, but because it comes from deep self-awareness and independence. She doesn''t play games or participate in social theatrics; instead, she observes, reflects, and acts only when it matters. People are drawn to her without always understanding why — perhaps it''s the calm she brings into chaos, or the way her presence commands respect without ever demanding it. Kelly is the type of person who can walk into a room and shift the energy just by being there. She listens more than she speaks, but when she does speak, her words are thoughtful, deliberate, and impactful. She''s not interested in fitting into molds or pleasing everyone — her authenticity doesn''t bend to trends or opinions. Instead, she cultivates her own space, her own rhythm, and her own way of being. Kelly is Sigma because she''s a leader who doesn''t need followers. She thrives in solitude, not because she''s antisocial, but because she values depth over noise. Her relationships are intentional and meaningful — she doesn''t waste time on superficial connections. She''s selective, not out of arrogance, but because she respects her energy and her boundaries. While others are trying to be seen, Kelly sees through everything — the pretenses, the masks, the distractions — and chooses not to engage unless it''s real. Her strength lies in the fact that she doesn''t need to compete; she simply rises. She''s not reactive, she''s strategic. She doesn''t seek control, yet somehow always has it. Her independence is inspiring, not isolating, because it shows others that it''s okay to be self-reliant, to say no, to walk away, to build quietly and live intentionally. Kelly is the embodiment of subtle power, focused intention, and authentic self-respect. She doesn''t wait for opportunities — she creates them. She doesn''t boast about her success — it speaks for itself. When life throws challenges her way, she doesn''t panic — she pauses, analyzes, and adapts. That''s what makes her Sigma: she doesn''t just navigate the world, she transcends it. She operates on a frequency that isn''t always seen, but always felt. She''s not defined by what she does for show, but by what she does when no one''s watching. In a world that often rewards noise, Kelly is proof that true strength is silent, steady, and deeply rooted in knowing exactly who you are — and never compromising that, no matter what.');
 
 
-DROP TABLE IF EXISTS trivial_answer;
-DROP TABLE IF EXISTS trivial;
+DROP TABLE IF EXISTS trivia_choice;
+DROP TABLE IF EXISTS trivia;
 
-CREATE TABLE trivial
+CREATE TABLE trivia
 (
-    id           INT           NOT NULL AUTO_INCREMENT,
-    question     VARCHAR(2000) NOT NULL,
-    explaination VARCHAR(2000) NOT NULL,
+    id          INT           NOT NULL AUTO_INCREMENT,
+    question    VARCHAR(2000) NOT NULL,
+    explanation VARCHAR(2000) NOT NULL,
 
-    CONSTRAINT pk_trivial PRIMARY KEY (id)
+    CONSTRAINT pk_trivia PRIMARY KEY (id)
 );
 
-CREATE TABLE trivial_answer
+CREATE TABLE trivia_choice
 (
-    id         INT           NOT NULL AUTO_INCREMENT,
-    trivial_id INT           NOT NULL,
-    choice     VARCHAR(2000) NOT NULL,
-    is_correct BOOL          NOT NULL,
+    id          INT           NOT NULL AUTO_INCREMENT,
+    trivia_id   INT           NOT NULL,
+    choice      VARCHAR(2000) NOT NULL,
+    is_correct  BOOL          NOT NULL,
 
-    CONSTRAINT pk_trivial_answer PRIMARY KEY (id)
+    CONSTRAINT pk_trivia_choice PRIMARY KEY (id)
 );
 
-ALTER TABLE trivial_answer
-    ADD CONSTRAINT fk_trivial_answer
-        FOREIGN KEY (trivial_id) REFERENCES trivial (id);
+ALTER TABLE trivia_choice
+    ADD CONSTRAINT fk_trivia_choice
+        FOREIGN KEY (trivia_id) REFERENCES trivia (id);
 
+INSERT INTO trivia(id, question, explanation)
+VALUES (1, 'What is the largest organ in the human body?', 'It''s the skin! Otherwise known as "epidermis."');
+INSERT INTO trivia_choice(trivia_id, choice, is_correct)
+VALUES(1, 'The brain', false);
+INSERT INTO trivia_choice(trivia_id, choice, is_correct)
+VALUES(1, 'The large intestine', false);
+INSERT INTO trivia_choice(trivia_id, choice, is_correct)
+VALUES(1, 'The liver', false);
+INSERT INTO trivia_choice(trivia_id, choice, is_correct)
+VALUES(1, 'The Skin', true);
+
+INSERT INTO trivia(id, question, explanation)
+VALUES (2, 'How many bones are in the human body?', 'I won''t make you name all of them, though, don''t worry.');
+INSERT INTO trivia_choice(trivia_id, choice, is_correct)
+VALUES(2, '186', false);
+INSERT INTO trivia_choice(trivia_id, choice, is_correct)
+VALUES(2, '198', false);
+INSERT INTO trivia_choice(trivia_id, choice, is_correct)
+VALUES(2, '206', true);
+INSERT INTO trivia_choice(trivia_id, choice, is_correct)
+VALUES(2, '248', false);
+
+INSERT INTO trivia(id, question, explanation)
+VALUES (3, 'What is the name of the scientist who developed the theory of evolution?', 'Charles Darwin. What a king.');
+INSERT INTO trivia_choice(trivia_id, choice, is_correct)
+VALUES(3, 'Alfred Wallace', false);
+INSERT INTO trivia_choice(trivia_id, choice, is_correct)
+VALUES(3, 'Charles Darwin', true);
+INSERT INTO trivia_choice(trivia_id, choice, is_correct)
+VALUES(3, 'Jean-Baptiste Lamarck', false);
+INSERT INTO trivia_choice(trivia_id, choice, is_correct)
+VALUES(3, 'Thomas Malthus', false);
