@@ -13,7 +13,7 @@ export class AboutComponent {
   message: any[] = [];
 
   ngOnInit() {
-    fetch(`${environment.apiBaseUrl}/api/home`)
+    fetch(`${environment.apiBaseUrl}/api/trivia`)
       .then(res => res.json())
       .then(data => this.message = data);
   }
