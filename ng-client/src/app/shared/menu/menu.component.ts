@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -20,7 +20,25 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent {
+  // constructor(private router: Router) {}
+
+  // reloadTrivia(event: MouseEvent) {
+  //   event.preventDefault(); // prevent default link navigation
+
+  //   const currentUrl = this.router.url;
+
+  //   if (currentUrl === '/trivia') {
+  //     // Force a route reload
+  //     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+  //       this.router.navigate(['/trivia']);
+  //     });
+  //   } else {
+  //     this.router.navigate(['/trivia']);
+  //   }
+  // }
+
   onLogin() {
     alert('Login clicked!');
   }
 }
+

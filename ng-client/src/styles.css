@@ -305,3 +305,26 @@
   font-size: 1.2rem;
   padding: 2rem;
 }
+
+.quiz-nav button {
+  background: #0072ce;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 22px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  user-select: none;
+}
+
+.quiz-nav button:hover:not(:disabled) {
+  background: #005fa3;
+}
+
+.quiz-nav button:disabled {
+  background: #ccc;
+  color: #888;
+  cursor: default;
+}

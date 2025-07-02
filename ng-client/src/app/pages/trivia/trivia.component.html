@@ -1,10 +1,10 @@
-<div class="quiz-root" *ngIf="questionData">
-  <h2 class="quiz-question">{{ questionData.question }}</h2>
+<div class="quiz-root" *ngIf="currentQuestion; else loading">
+  <h2 class="quiz-question">{{ currentQuestion.question }}</h2>
 
   <form class="quiz-form">
     <div
       class="quiz-choice"
-      *ngFor="let choice of questionData.choices; let i = index"
+      *ngFor="let choice of currentQuestion.choices; let i = index"
     >
       <label>
         <input
@@ -24,11 +24,20 @@
     <p *ngIf="isCorrect === false" class="quiz-wrong">❌ Incorrect</p>
 
     <div class="quiz-explanation">
-      <strong>Explanation:</strong> {{ questionData.explanation }}
+      <strong>Explanation:</strong> {{ currentQuestion.explanation }}
     </div>
+  </div>
+
+  <div class="quiz-nav" style="margin-top: 2rem; display: flex; gap: 1rem;">
+    <button (click)="prevQuestion()" [disabled]="currentIndex === 0">
+      ← Previous
+    </button>
+    <button (click)="nextQuestion()" [disabled]="currentIndex === questions.length - 1">
+      Next →
+    </button>
   </div>
 </div>
 
-<div *ngIf="!questionData" class="quiz-loading">
-  Loading question...
-</div>
+<ng-template #loading>
+  <div class="quiz-loading">Loading questions...</div>
+</ng-template>
