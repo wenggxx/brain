@@ -1,8 +1,11 @@
-<div *ngIf="questionData">
-  <h2>{{ questionData.question }}</h2>
+<div class="quiz-root" *ngIf="questionData">
+  <h2 class="quiz-question">{{ questionData.question }}</h2>
 
-  <form>
-    <div *ngFor="let choice of questionData.choices; let i = index">
+  <form class="quiz-form">
+    <div
+      class="quiz-choice"
+      *ngFor="let choice of questionData.choices; let i = index"
+    >
       <label>
         <input
           type="radio"
@@ -16,17 +19,16 @@
     </div>
   </form>
 
-  <div *ngIf="selectedChoiceIndex !== null" style="margin-top: 1em;">
-    <p *ngIf="isCorrect" style="color: green;">✅ Correct!</p>
-    <p *ngIf="isCorrect === false" style="color: red;">❌ Incorrect</p>
+  <div *ngIf="selectedChoiceIndex !== null" class="quiz-feedback">
+    <p *ngIf="isCorrect" class="quiz-correct">✅ Correct!</p>
+    <p *ngIf="isCorrect === false" class="quiz-wrong">❌ Incorrect</p>
 
-    <!-- 🟡 Explanation shown *after* answer feedback -->
-    <div style="margin-top: 1em;">
+    <div class="quiz-explanation">
       <strong>Explanation:</strong> {{ questionData.explanation }}
     </div>
   </div>
 </div>
 
-<div *ngIf="!questionData">
+<div *ngIf="!questionData" class="quiz-loading">
   Loading question...
 </div>
