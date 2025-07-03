@@ -26,9 +26,12 @@
 /* Responsive Menu */
 @media (max-width: 768px) {
   .top-menu {
-    flex-wrap: wrap;
-    height: auto;
-    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    height: 60px;
+    padding: 0 1rem;
   }
 
   .menu-toggle {
@@ -36,22 +39,22 @@
     order: 0;
   }
 
+  .login-btn {
+    order: 1;
+    width: auto;
+    margin-top: 0;
+  }
+
   .top-menu-left {
     display: none;
     flex-direction: column;
     width: 100%;
-    margin-top: 0.5rem;
     gap: 1rem;
-    order: 1;
+    margin-top: 0.5rem;
+    order: 2;
   }
 
   .top-menu-left.open {
     display: flex;
-  }
-
-  .login-btn {
-    order: 2;
-    width: 100%;
-    margin-top: 0.5rem;
   }
 }
