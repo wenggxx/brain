@@ -58,9 +58,11 @@ CREATE TABLE trivia
     id          INT           NOT NULL AUTO_INCREMENT,
     question    VARCHAR(2000) NOT NULL,
     explanation VARCHAR(2000) NOT NULL,
+    create_dts  DATETIME      NOT NULL,
 
     CONSTRAINT pk_trivia PRIMARY KEY (id)
 );
+CREATE INDEX idx_trivia_create_dts ON trivia(create_dts);
 
 CREATE TABLE trivia_choice
 (
@@ -76,8 +78,8 @@ ALTER TABLE trivia_choice
     ADD CONSTRAINT fk_trivia_choice
         FOREIGN KEY (trivia_id) REFERENCES trivia (id);
 
-INSERT INTO trivia(id, question, explanation)
-VALUES (1, 'What is the largest organ in the human body?', 'It''s the skin! Otherwise known as "epidermis."');
+INSERT INTO trivia(id, question, explanation, create_dts)
+VALUES (1, 'What is the largest organ in the human body?', 'It''s the skin! Otherwise known as "epidermis."', NOW());
 INSERT INTO trivia_choice(trivia_id, choice, is_correct)
 VALUES(1, 'The brain', false);
 INSERT INTO trivia_choice(trivia_id, choice, is_correct)
@@ -87,8 +89,8 @@ VALUES(1, 'The liver', false);
 INSERT INTO trivia_choice(trivia_id, choice, is_correct)
 VALUES(1, 'The Skin', true);
 
-INSERT INTO trivia(id, question, explanation)
-VALUES (2, 'How many bones are in the human body?', 'I won''t make you name all of them, though, don''t worry.');
+INSERT INTO trivia(id, question, explanation, create_dts)
+VALUES (2, 'How many bones are in the human body?', 'I won''t make you name all of them, though, don''t worry.', NOW());
 INSERT INTO trivia_choice(trivia_id, choice, is_correct)
 VALUES(2, '186', false);
 INSERT INTO trivia_choice(trivia_id, choice, is_correct)
@@ -98,8 +100,8 @@ VALUES(2, '206', true);
 INSERT INTO trivia_choice(trivia_id, choice, is_correct)
 VALUES(2, '248', false);
 
-INSERT INTO trivia(id, question, explanation)
-VALUES (3, 'What is the name of the scientist who developed the theory of evolution?', 'Charles Darwin. What a king.');
+INSERT INTO trivia(id, question, explanation, create_dts)
+VALUES (3, 'What is the name of the scientist who developed the theory of evolution?', 'Charles Darwin. What a king.', NOW());
 INSERT INTO trivia_choice(trivia_id, choice, is_correct)
 VALUES(3, 'Alfred Wallace', false);
 INSERT INTO trivia_choice(trivia_id, choice, is_correct)
@@ -108,3 +110,20 @@ INSERT INTO trivia_choice(trivia_id, choice, is_correct)
 VALUES(3, 'Jean-Baptiste Lamarck', false);
 INSERT INTO trivia_choice(trivia_id, choice, is_correct)
 VALUES(3, 'Thomas Malthus', false);
+
+DROP TABLE IF EXISTS trending;
+CREATE TABLE trending
+(
+    id         INT          NOT NULL AUTO_INCREMENT,
+    message    VARCHAR(200) NOT NULL,
+    create_dts DATETIME     NOT NULL DEFAULT NOW(),
+
+    CONSTRAINT pk_trending PRIMARY KEY (id)
+);
+
+INSERT INTO trending(message)
+VALUES('Neuroplasticity - the brain’s ability to rewire itself - continues to redefine how we approach brain health');
+INSERT INTO trending(message)
+VALUES('Evolving MRI Machines - Bigger and better or smaller and smarter? This is the tug-of-war between engineers pursuing more powerful forms of MRI technology.');
+INSERT INTO trending(message)
+VALUES('AI in the Neuroradiology Clinic');

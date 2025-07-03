@@ -117,9 +117,11 @@
 }
 
 .home-sidebar-list li {
-  display: list-item;
   margin-bottom: 0.5em;
   white-space: normal;
+  line-height: 1.4;
+  max-width: 30ch; /* limits line width to ~30 characters */
+  word-wrap: break-word; /* ensures long words break correctly */
 }
 
 .home-footer {

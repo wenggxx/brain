@@ -31,7 +31,37 @@ con.connect(function(err) {
 app.get('/api/home', (req, res) => {
       con.connect(function(err) {
       if (err) throw err;
-      con.query("SELECT * FROM news LIMIT 10", function (err, result, fields) {
+      con.query(`        
+        SELECT JSON_OBJECT(
+          'news', (
+            SELECT JSON_ARRAYAGG(
+              JSON_OBJECT(
+                'id', n.id,
+                'title', n.title,
+                'create_dts', n.create_dts,
+                'image_url', n.image_url,
+                'description', n.description,
+                'author', n.author,
+                'source', n.source,
+                'summary', n.summary,
+                'body', n.body
+              )
+            )
+            FROM (
+              SELECT * FROM news ORDER BY create_dts DESC LIMIT 10
+            ) AS n
+          ),
+          'trendings', (
+            SELECT JSON_ARRAYAGG(
+              JSON_OBJECT(
+                'message', t.message
+              )
+            )
+            FROM (
+              SELECT * FROM trending ORDER BY create_dts DESC LIMIT 5
+            ) AS t
+          )
+        ) AS result;`, function (err, result, fields) {
         if (err) throw err;
         res.json(result);
       });

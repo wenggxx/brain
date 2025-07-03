@@ -12,6 +12,7 @@ import { environment } from '../../../environments/environment';
 })
 export class HomeComponent {
   articles: any[] = [];
+  trendings: any[] = [];
   loading = true;
   today = new Date();
 
@@ -21,7 +22,15 @@ export class HomeComponent {
     fetch(`${environment.apiBaseUrl}/api/home`)
       .then(res => res.json())
       .then(data => {
-        this.articles = data;
+        const result = Array.isArray(data) && data.length > 0 ? data[0].result : null;
+        if (result) {
+          this.articles = result.news || [];
+          this.trendings = result.trendings || [];
+        } else {
+          this.articles = [];
+          this.trendings = [];
+        }
+
         this.loading = false;
       })
       .catch(() => this.loading = false);

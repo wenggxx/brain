@@ -34,11 +34,9 @@
     <aside class="home-sidebar">
       <h4 class="home-sidebar-title">Trending</h4>
       <ul class="home-sidebar-list">
-        <li> Supreme Court Ruling on Tech</li>
-        <li> Summer Travel Destinations</li>
-        <li> NBA Finals Recap</li>
-        <li> Climate Change Initiatives</li>
-        <li> New York City Dining Guide</li>
+        <li *ngFor="let item of trendings">
+          {{ item.message }}
+        </li>
       </ul>
     </aside>
   </main>
