@@ -13,3 +13,44 @@
 .top-menu a.active {
   color: #0072ce;
 }
+
+/* Hamburger button */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+/* Responsive Menu */
+@media (max-width: 768px) {
+  .top-menu {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 1rem;
+  }
+
+  .top-menu-left {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .top-menu-left.open {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
+    margin-left: auto;
+  }
+
+  .login-btn {
+    order: 1;
+    margin-top: 1rem;
+    width: 100%;
+  }
+}

@@ -207,12 +207,14 @@
   padding: 0 2rem;
   height: 60px;
   font-family: 'Segoe UI', 'Arial', sans-serif;
-  z-index: 100;
+  z-index: 100;  
+  flex-wrap: wrap;
 }
 
 .top-menu-left {
   display: flex;
   gap: 2rem;
+  flex-wrap: wrap;
 }
 
 .top-menu a {
