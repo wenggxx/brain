@@ -7,6 +7,7 @@ import { Router, RouterModule } from '@angular/router';
   imports: [RouterModule],
   template: `
     <nav class="top-menu">
+    <div class="menu-left-wrapper">
       <button class="menu-toggle" (click)="toggleMenu()" aria-label="Toggle menu">
         &#9776;
       </button>
@@ -18,9 +19,10 @@ import { Router, RouterModule } from '@angular/router';
         <a routerLink="/trivia" routerLinkActive="active">Trivia</a>
         <a routerLink="/about" routerLinkActive="active">About</a>
       </div>
+    </div>
 
-      <button class="login-btn" (click)="onLogin()">Login</button>
-    </nav>
+    <button class="login-btn" (click)="onLogin()">Login</button>
+  </nav>
   `,
   styleUrls: ['./menu.component.css']
 })
