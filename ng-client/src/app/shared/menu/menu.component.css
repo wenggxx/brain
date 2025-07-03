@@ -28,29 +28,30 @@
   .top-menu {
     flex-wrap: wrap;
     height: auto;
-    padding: 1rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .menu-toggle {
+    display: block;
+    order: 0;
   }
 
   .top-menu-left {
     display: none;
     flex-direction: column;
     width: 100%;
+    margin-top: 0.5rem;
     gap: 1rem;
-    margin-top: 1rem;
+    order: 1;
   }
 
   .top-menu-left.open {
     display: flex;
   }
 
-  .menu-toggle {
-    display: block;
-    margin-left: auto;
-  }
-
   .login-btn {
-    order: 1;
-    margin-top: 1rem;
+    order: 2;
     width: 100%;
+    margin-top: 0.5rem;
   }
 }

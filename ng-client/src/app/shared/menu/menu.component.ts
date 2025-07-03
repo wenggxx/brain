@@ -7,6 +7,10 @@ import { Router, RouterModule } from '@angular/router';
   imports: [RouterModule],
   template: `
     <nav class="top-menu">
+      <button class="menu-toggle" (click)="toggleMenu()" aria-label="Toggle menu">
+        &#9776;
+      </button>
+
       <div class="top-menu-left" [class.open]="menuOpen">
         <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
         <a routerLink="/news" routerLinkActive="active">News</a>
@@ -16,10 +20,6 @@ import { Router, RouterModule } from '@angular/router';
       </div>
 
       <button class="login-btn" (click)="onLogin()">Login</button>
-
-      <button class="menu-toggle" (click)="toggleMenu()" aria-label="Toggle menu">
-        &#9776;
-      </button>
     </nav>
   `,
   styleUrls: ['./menu.component.css']
